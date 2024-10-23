@@ -28,6 +28,10 @@ return {
         "vimdoc",
         "html",
         "css",
+        "tsx",
+        "javascript",
+        "typescript",
+        "python",
       },
     },
   },
@@ -120,12 +124,16 @@ return {
   },
 
   {
-    "samodostal/image.nvim",
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require("lspsaga").setup {}
+    end,
+    event = "LspAttach",
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter", -- optional
+      "nvim-tree/nvim-web-devicons",     -- optional
     },
   },
-
   -- {
   --   "Exafunction/codeium.nvim",
   --   dependencies = {

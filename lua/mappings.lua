@@ -19,3 +19,13 @@ map("n", "<leader>tt", function()
 end, {
   desc = "Toggle transparency",
 })
+
+map("n", "x", '"_x', { desc = "Remove current character without yank" })
+
+-- lspsaga
+map("n", "<C-j>", "<Cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "LSPSaga go next diagnostic" })
+map("n", "<C-k>", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "LSPSaga go prev diagnostic" })
+map("n", "gp", "<Cmd>Lspsaga peek_definition<CR>", { desc = "LSPSaga preview defenition" })
+
+map("n", "<leader>sv", "<Cmd>sv<CR>", { desc = "Split vertical" })
+map("n", "<leader>vs", "<Cmd>vs<CR>", { desc = "Split horizontal" })
