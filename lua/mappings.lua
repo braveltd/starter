@@ -1,7 +1,5 @@
 require "nvchad.mappings"
 
--- add yours here
-
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -29,3 +27,7 @@ map("n", "gp", "<Cmd>Lspsaga peek_definition<CR>", { desc = "LSPSaga preview def
 
 map("n", "<leader>sv", "<Cmd>sv<CR>", { desc = "Split vertical" })
 map("n", "<leader>vs", "<Cmd>vs<CR>", { desc = "Split horizontal" })
+
+map("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "telescope find all todos" })
+
+-- TODO: get all old one

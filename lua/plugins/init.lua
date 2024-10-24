@@ -1,22 +1,20 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        require "configs.null-ls"
-      end,
-    },
     config = function()
       require "configs.lspconfig"
     end,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "folke/todo-comments.nvim" },
   },
 
   {
@@ -59,38 +57,45 @@ return {
 
   {
     "folke/trouble.nvim",
+    dependencies = { "folke/todo-comments.nvim" },
     opts = {}, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
+
+      {
+        "<leader>xt",
+        "<Cmd>Trouble todo<CR>",
+        desc = "Trouble find all todos",
+      },
       {
         "<leader>xx",
         "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
+        desc = "Trouble Diagnostics",
       },
       {
         "<leader>xX",
         "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
+        desc = "Trouble Buffer Diagnostics",
       },
       {
         "<leader>cs",
         "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
+        desc = "Trouble Symbols",
       },
       {
         "<leader>cl",
         "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
+        desc = "Trouble LSP Definitions / references / ...",
       },
       {
         "<leader>xL",
         "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
+        desc = "Trouble Location List",
       },
       {
         "<leader>xQ",
         "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
+        desc = "Trouble Quickfix List",
       },
     },
   },
@@ -131,9 +136,35 @@ return {
     event = "LspAttach",
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons",     -- optional
+      "nvim-tree/nvim-web-devicons", -- optional
     },
   },
+
+  {
+    "gbprod/substitute.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "configs.substitute"
+    end,
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = { "BufReadPre", "BufNewFile" },
+    -- event = "VeryLazy",
+    config = true,
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require "configs.todo-comments"
+    end,
+  },
+
   -- {
   --   "Exafunction/codeium.nvim",
   --   dependencies = {
