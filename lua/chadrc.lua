@@ -9,9 +9,7 @@ M.base46 = {
   theme = "catppuccin",
   theme_toggle = { "catppuccin", "everforest_light" },
 
-  -- todo = {
-  --
-  -- }
+  integrations = { "todo", "trouble", "lspsaga", "notify" },
 
   -- makes comments in italic style
   hl_override = {

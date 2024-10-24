@@ -1,6 +1,6 @@
 local todo_comments = require "todo-comments"
 
--- dofile(vim.g.base46_cache .. "todo")
+dofile(vim.g.base46_cache .. "todo")
 
 todo_comments.setup {
   keywords = {

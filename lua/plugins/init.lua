@@ -60,8 +60,10 @@ return {
     dependencies = { "folke/todo-comments.nvim" },
     opts = {}, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
+    config = function()
+      dofile(vim.g.base46_cache .. "trouble")
+    end,
     keys = {
-
       {
         "<leader>xt",
         "<Cmd>Trouble todo<CR>",
@@ -103,6 +105,7 @@ return {
   {
     "rcarriga/nvim-notify",
     config = function()
+      dofile(vim.g.base46_cache .. "notify")
       require("notify").setup {
         background_colour = "#000000",
       }
@@ -131,6 +134,7 @@ return {
   {
     "nvimdev/lspsaga.nvim",
     config = function()
+      dofile(vim.g.base46_cache .. "lspsaga")
       require("lspsaga").setup {}
     end,
     event = "LspAttach",
