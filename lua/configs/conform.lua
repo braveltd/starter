@@ -1,16 +1,20 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    css = { "prettierd" },
-    html = { "prettierd" },
-    typescript = { "prettierd" },
-    javascript = { "prettierd" },
-    typescriptreact = { "prettierd" },
-    javascriptreact = { "prettierd" },
     python = { "black" },
-    json = { "prettierd" },
-    scss = { "prettierd" },
     yaml = { "prettierd" },
+
+    -- webdev
+    javascript = { "prettierd" },
+    javascriptreact = { "prettierd" },
+    typescript = { "prettierd" },
+    typescriptreact = { "prettierd" },
+
+    css = { "prettierd" },
+    scss = { "prettierd" },
+    html = { "prettierd" },
+    json = { "prettierd" },
+    jsonc = { "prettierd" },
   },
 
   format_on_save = {

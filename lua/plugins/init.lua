@@ -1,4 +1,40 @@
+---@type NvPluginSpec[]
 return {
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      {
+        -- snippet plugin
+        "L3MON4D3/LuaSnip",
+        config = function(_, opts)
+          require("luasnip").config.set_config(opts)
+
+          local luasnip = require "luasnip"
+
+          luasnip.filetype_extend("javascriptreact", { "html" })
+          luasnip.filetype_extend("typescriptreact", { "html" })
+          luasnip.filetype_extend("svelte", { "html" })
+
+          require "nvchad.configs.luasnip"
+        end,
+      },
+
+      -- ai based completion
+      {
+        "jcdickinson/codeium.nvim",
+        config = function()
+          require("codeium").setup {}
+        end,
+      },
+    },
+
+    config = function(_, opts)
+      table.insert(opts.sources, 1, { name = "codeium" })
+      opts.experimental = { ghost_text = true }
+      require("cmp").setup(opts)
+    end,
+  },
+
   {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
@@ -8,13 +44,41 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
   },
 
   {
-    "nvim-telescope/telescope.nvim",
-    dependencies = { "folke/todo-comments.nvim" },
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "black",
+        "css-lsp",
+        "emmet-ls",
+        "eslint-lsp",
+        "eslint_d",
+        "html-lsp",
+        "json-lsp",
+        "jsonlint",
+        "lua-language-server",
+        "prettierd",
+        "prettier",
+        "pyright",
+        "stylua",
+        "tree-sitter-cli",
+        "typescript-language-server",
+      },
+    },
+  },
+
+  -- distraction free mode
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    config = function()
+      require "configs.zenmode"
+    end,
   },
 
   {
@@ -31,13 +95,31 @@ return {
         "javascript",
         "typescript",
         "python",
+        "markdown",
+        "bash",
+      },
+      auto_install = true,
+      autotag = {
+        enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
       },
     },
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        auto_install = true,
-      }
-    end,
+    dependencies = {
+      {
+        "windwp/nvim-ts-autotag",
+        config = function()
+          require("nvim-ts-autotag").setup()
+        end,
+      },
+    },
   },
 
   {
@@ -65,9 +147,11 @@ return {
     "folke/trouble.nvim",
     dependencies = { "folke/todo-comments.nvim" },
     opts = {}, -- for default options, refer to the configuration section for custom setup.
-    cmd = "Trouble",
+    cmd = { "Trouble", "TodoTrouble" },
     config = function()
       dofile(vim.g.base46_cache .. "trouble")
+
+      require("trouble").setup()
     end,
     keys = {
       {
@@ -175,14 +259,38 @@ return {
     end,
   },
 
-  -- {
-  --   "Exafunction/codeium.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp",
-  --   },
-  --   config = function()
-  --     require("codeium").setup {}
-  --   end,
-  -- },
+  -- smooth scroll
+  {
+    "karb94/neoscroll.nvim",
+    keys = { "<C-d>", "<C-u>" },
+    config = function()
+      require("neoscroll").setup()
+    end,
+  },
+
+  -- dim inactive windows
+  {
+    "andreadev-it/shade.nvim",
+    config = function()
+      require("shade").setup {
+        exclude_filetypes = { "NvimTree" },
+      }
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      extensions_list = { "fzf", "nerdy" },
+    },
+    dependencies = {
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "2kabhishek/nerdy.nvim",
+      "folke/todo-comments.nvim",
+    },
+  },
+
+  "NvChad/nvcommunity",
+
+  { import = "nvcommunity.editor.telescope-undo" },
 }
