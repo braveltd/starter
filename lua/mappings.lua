@@ -3,7 +3,9 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+
+map("i", "jk", "<ESC>", { desc = "escape insert mode" })
+
 map("n", "+", "<C-a>", { desc = "increment " })
 map("n", "-", "<C-x>", { desc = "decrement " })
 map("n", "<C-t>", "<cmd> enew <CR>", { desc = "new buffer" })
@@ -30,4 +32,6 @@ map("n", "<leader>vs", "<Cmd>vs<CR>", { desc = "Split horizontal" })
 
 map("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "telescope find all todos" })
 
--- TODO: get all old one
+map("n", "<Bslash>", function()
+  require("shade").toggle()
+end, { desc = "Toggle shade.nvim" })
