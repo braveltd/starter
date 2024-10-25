@@ -27,11 +27,17 @@ return {
         "html",
         "css",
         "tsx",
+        "toml",
         "javascript",
         "typescript",
         "python",
       },
     },
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        auto_install = true,
+      }
+    end,
   },
 
   {
