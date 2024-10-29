@@ -30,7 +30,7 @@ return {
 
     config = function(_, opts)
       table.insert(opts.sources, 1, { name = "codeium" })
-      opts.experimental = { ghost_text = true }
+      -- opts.experimental = { ghost_text = true }
       require("cmp").setup(opts)
     end,
   },
@@ -112,14 +112,13 @@ return {
         },
       },
     },
-    dependencies = {
-      {
-        "windwp/nvim-ts-autotag",
-        config = function()
-          require("nvim-ts-autotag").setup()
-        end,
-      },
-    },
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
   },
 
   {
@@ -287,6 +286,17 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "2kabhishek/nerdy.nvim",
       "folke/todo-comments.nvim",
+    },
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+    keys = {
+      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "window left" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "window down" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "window up" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "window right" },
     },
   },
 
