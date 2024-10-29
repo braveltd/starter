@@ -155,7 +155,7 @@ return {
     keys = {
       {
         "<leader>xt",
-        "<Cmd>Trouble todo<CR>",
+        "<cmd>Trouble todo<cr>",
         desc = "Trouble find all todos",
       },
       {
@@ -226,6 +226,11 @@ return {
       dofile(vim.g.base46_cache .. "lspsaga")
       require("lspsaga").setup {}
     end,
+    keys = {
+      { "<C-j>", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "LSPSaga go next diagnostic" },
+      { "<C-k>", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "LSPSaga go prev diagnostic" },
+      { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "LSPSaga preview defenition" },
+    },
     event = "LspAttach",
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
@@ -286,17 +291,6 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "2kabhishek/nerdy.nvim",
       "folke/todo-comments.nvim",
-    },
-  },
-
-  {
-    "christoomey/vim-tmux-navigator",
-    lazy = false,
-    keys = {
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>", desc = "window left" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>", desc = "window down" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>", desc = "window up" },
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>", desc = "window right" },
     },
   },
 
