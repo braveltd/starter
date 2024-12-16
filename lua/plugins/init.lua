@@ -272,6 +272,20 @@ return {
     end,
   },
 
+  -- smooth moving
+  {
+    "declancm/cinnamon.nvim",
+    version = "*", -- use latest release
+    config = function()
+      require("cinnamon").setup {
+        keymaps = {
+          basic = true,
+          extra = true,
+        },
+      }
+    end,
+  },
+
   -- dim inactive windows
   {
     "andreadev-it/shade.nvim",
