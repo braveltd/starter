@@ -2,7 +2,6 @@ local options = {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "black" },
-    yaml = { "prettierd" },
 
     -- webdev
     javascript = { "prettierd" },
@@ -13,6 +12,10 @@ local options = {
     css = { "prettierd" },
     scss = { "prettierd" },
     html = { "prettierd" },
+
+    -- info files, config files
+    yaml = { "prettierd" },
+    toml = { "taplo" },
     json = { "prettierd" },
     jsonc = { "prettierd" },
   },
