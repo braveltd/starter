@@ -10,3 +10,5 @@ o.relativenumber = true
 o.wrap = false
 o.swapfile = false
 o.scrolloff = 5
+
+o.laststatus = 3
