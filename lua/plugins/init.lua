@@ -20,12 +20,13 @@ return {
       },
 
       -- ai based completion
-      {
-        "jcdickinson/codeium.nvim",
-        config = function()
-          require("codeium").setup {}
-        end,
-      },
+      -- disable for now
+      -- {
+      --   "jcdickinson/codeium.nvim",
+      --   config = function()
+      --     require("codeium").setup {}
+      --   end,
+      -- },
     },
 
     config = function(_, opts)
@@ -196,7 +197,10 @@ return {
     config = function()
       dofile(vim.g.base46_cache .. "notify")
       require("notify").setup {
-        background_colour = "#000000",
+        timeout = 3000,
+        stages = "static",
+        -- needed sometimes
+        -- this background_colour = "#000000",
       }
     end,
   },
