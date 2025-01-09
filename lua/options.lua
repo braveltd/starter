@@ -12,3 +12,5 @@ o.swapfile = false
 o.scrolloff = 5
 
 o.laststatus = 3
+
+-- vim.g.vscode_snippets_path = "/snippets/vscode"

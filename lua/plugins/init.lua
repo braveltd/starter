@@ -18,15 +18,6 @@ return {
           require "nvchad.configs.luasnip"
         end,
       },
-
-      -- ai based completion
-      -- disable for now
-      -- {
-      --   "jcdickinson/codeium.nvim",
-      --   config = function()
-      --     require("codeium").setup {}
-      --   end,
-      -- },
     },
 
     config = function(_, opts)
@@ -71,15 +62,6 @@ return {
         "typescript-language-server",
       },
     },
-  },
-
-  -- distraction free mode
-  {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    config = function()
-      require "configs.zenmode"
-    end,
   },
 
   {
@@ -193,38 +175,6 @@ return {
   },
 
   {
-    "rcarriga/nvim-notify",
-    config = function()
-      dofile(vim.g.base46_cache .. "notify")
-      require("notify").setup {
-        timeout = 3000,
-        stages = "static",
-        -- needed sometimes
-        -- this background_colour = "#000000",
-      }
-    end,
-  },
-
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require "configs.noice"
-    end,
-  },
-
-  {
     "nvimdev/lspsaga.nvim",
     config = function()
       dofile(vim.g.base46_cache .. "lspsaga")
@@ -258,22 +208,53 @@ return {
     config = true,
   },
 
+  -- ai editing features like cursor editor
   {
-    "folke/todo-comments.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require "configs.todo-comments"
-    end,
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = true,
+    opts = {
+      -- add any opts here
+    },
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
   },
 
-  -- smooth scroll
+  -- section: visual enhancement
+
+  -- to dim inactive windows
   {
-    "karb94/neoscroll.nvim",
-    keys = { "<C-d>", "<C-u>" },
-    config = function()
-      require("neoscroll").setup()
-    end,
+    "miversen33/sunglasses.nvim",
+    config = true,
   },
 
   -- smooth moving
@@ -290,62 +271,66 @@ return {
     end,
   },
 
-  -- dim inactive windows
+  -- smooth scroll
   {
-    "andreadev-it/shade.nvim",
+    "karb94/neoscroll.nvim",
+    keys = { "<C-d>", "<C-u>" },
     config = function()
-      require("shade").setup {
-        exclude_filetypes = { "NvimTree" },
+      require("neoscroll").setup()
+    end,
+  },
+
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      dofile(vim.g.base46_cache .. "notify")
+      require("notify").setup {
+        timeout = 3000,
+        stages = "static",
+        -- needed sometimes
+        -- this background_colour = "#000000",
       }
     end,
   },
 
-  -- ai editing features like cursor editor
   {
-    "yetone/avante.nvim",
+    "folke/noice.nvim",
     event = "VeryLazy",
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
     opts = {
-      -- add any opts here
+      -- add any options here
     },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
     dependencies = {
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
     },
+    config = function()
+      require "configs.noice"
+    end,
   },
 
+  {
+    "folke/todo-comments.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require "configs.todo-comments"
+    end,
+  },
+
+  -- distraction free mode
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    config = function()
+      require "configs.zenmode"
+    end,
+  },
+
+  -- section: misc and scary
   {
     "nvim-telescope/telescope.nvim",
     opts = {

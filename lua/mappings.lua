@@ -34,4 +34,29 @@ map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "telescope find all to
 
 map("n", "<Bslash>", function()
   require("shade").toggle()
-end, { desc = "Toggle shade.nvim" })
+end, { desc = "Toggle shade" })
+
+-- open hue editor
+map("n", "<leader>sc", function()
+  require("plenary.reload").reload_module "minty.huefy"
+  require("minty.huefy").open()
+end)
+
+-- support for nice visual menu vscode like
+
+map({ "n", "v" }, "<RightMouse>", function()
+  require("menu.utils").delete_old_menus()
+
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+
+  -- clicked buf
+  local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+  local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
+
+  require("menu").open(options, { mouse = true })
+end)
+
+vim.keymap.set("n", "<A-e>", function()
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+  require("menu").open(options)
+end, {})
