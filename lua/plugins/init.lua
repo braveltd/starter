@@ -61,6 +61,8 @@ return {
         "tree-sitter-cli",
         "typescript-language-server",
         "vtsls",
+        "clangd", -- lsp for cpp and other
+        "clang-format", -- formatter for cpp and other
       },
     },
   },
