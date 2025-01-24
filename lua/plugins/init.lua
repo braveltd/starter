@@ -356,6 +356,13 @@ return {
     },
   },
 
+  {
+    "nvzone/typr",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = { "Typr", "TyprStats" },
+  },
+
   "NvChad/nvcommunity",
 
   { import = "nvcommunity.editor.telescope-undo" },
