@@ -2,22 +2,20 @@ require "nvchad.options"
 
 local o = vim.o
 
-o.title = true
+o.encoding = "utf-8"
+o.fileencoding = "utf-8"
 
+o.clipboard = "unnamedplus"
 o.cursorlineopt = "both" -- to enable cursorline!
-
 o.relativenumber = true
 o.wrap = false
 o.swapfile = false
 o.scrolloff = 5
-
 o.laststatus = 3
 
--- o.keymap = "russian-jcukenwin"
--- o.iminsert = 0
--- o.imsearch = 0
-
-o.clipboard = "unnamedplus"
+o.termguicolors = true
+o.emoji = false
+o.textwidth = 0
 
 if vim.fn.has "wsl" == 1 then
   vim.g.clipboard = {

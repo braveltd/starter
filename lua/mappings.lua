@@ -6,9 +6,11 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 
 map("i", "jk", "<ESC>", { desc = "escape insert mode" })
 
-map("n", "+", "<C-a>", { desc = "increment " })
-map("n", "-", "<C-x>", { desc = "decrement " })
-map("n", "<C-t>", "<cmd> enew <cr>", { desc = "new buffer" })
+map("n", "+", "<C-a>", { desc = "increment" })
+map("n", "-", "<C-x>", { desc = "decrement" })
+
+map("n", "<C-t>", "<cmd> enew <cr>", { desc = "New buffer" })
+
 map("n", "<C-w><left>", "<C-w><", { desc = "Resize left" })
 map("n", "<C-w><right>", "<C-w>>", { desc = "Resize right" })
 map("n", "<C-w><up>", "<C-w>+", { desc = "Resize up" })
@@ -21,11 +23,6 @@ end, {
 })
 
 map("n", "x", '"_x', { desc = "Remove current character without yank" })
-
--- -- lspsaga
--- map("n", "<C-j>", "<cmd>Lspsaga diagnostic_jump_next<cr>", { desc = "LSPSaga go next diagnostic" })
--- map("n", "<C-k>", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { desc = "LSPSaga go prev diagnostic" })
--- map("n", "gp", "<cmd>Lspsaga peek_definition<cr>", { desc = "LSPSaga preview defenition" })
 
 map("n", "<leader>sv", "<cmd>sv<cr>", { desc = "Split vertical" })
 map("n", "<leader>vs", "<cmd>vs<cr>", { desc = "Split horizontal" })
@@ -43,7 +40,6 @@ map("n", "<leader>sc", function()
 end)
 
 -- support for nice visual menu vscode like
-
 map({ "n", "v" }, "<RightMouse>", function()
   require("menu.utils").delete_old_menus()
 
